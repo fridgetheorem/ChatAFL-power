@@ -4635,6 +4635,8 @@ static u8 save_if_interesting(char **argv, void *mem, u32 len, u8 fault)
   // s32 fd;
   u8 keeping = 0, res;
 
+  // CH TODO: In this, we want to determine whether 2 traces are alike, and if they share bits. If they are not alike, then it is an interesting case.
+  //    Is this appropriate to do here?
   if (fault == crash_mode)
   {
 
@@ -6292,6 +6294,10 @@ EXP_ST u8 common_fuzz_stuff(char **argv, u8 *out_buf, u32 len)
 
   u8 is_interesting = save_if_interesting(argv, out_buf, len, fault);
 
+  // CH TODO
+  // This is where we need to make the determination whether or not a command is interesting...
+  // It's also useful to test if it has new bits, though!
+  // We can modify save_if_interesting to include the logic to compare the powertraces.
   if (is_interesting)
   {
     uninteresting_times = 0;
